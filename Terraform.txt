@@ -1,0 +1,49 @@
+# terraform-creating-instance
+Creating instance in AWS
+$ sudo yum install -y yum-utils
+$ sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+$ sudo yum -y install terraform
+$ terraform -help
+$ terraform -help plan
+$ touch ~/.bashrc
+$ terraform -install-autocomplete
+
+
+$ aws configure
+$ mkdir learn-terraform-aws-instance
+$ cd learn-terraform-aws-instance
+$ touch main.tf
+$vi main.tf
+
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.27"
+    }
+  }
+
+  required_version = ">= 0.14.9"
+}
+
+provider "aws" {
+  profile = "default"
+  region  = "us-east-1"
+}
+
+resource "aws_instance" "app_server" {
+  ami           = "ami-0242bbd23361d20e2"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "TeffraformInstance"
+  }
+}
+
+$ terraform init
+$ terraform fmt
+$ terraform validate
+$ terraform apply
+yes
+$ terraform show
+
